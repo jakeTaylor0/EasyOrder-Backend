@@ -3,11 +3,15 @@ package com.dnd.eorderservices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.dnd.eorderservices.model.Customer;
 import com.dnd.eorderservices.repository.CustomerRepo;
 
+@EnableAutoConfiguration
 @SpringBootApplication
 public class EasyOrderBackendApplication implements CommandLineRunner{
 
