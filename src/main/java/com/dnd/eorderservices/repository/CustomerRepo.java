@@ -7,5 +7,5 @@ import com.dnd.eorderservices.model.Customer;
 
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
-
+	
 }
