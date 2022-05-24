@@ -18,12 +18,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 		private CustomerRepo customerRepo;
 		
 		@Override
-		public void saveCustomer(Customer customer) {
-			customerRepo.save(customer);
+		public Customer saveCustomer(Customer customer) {
+			return customerRepo.save(customer);
 		}
 		
 		@Override
 		public List<Customer> findAllCustomers(){
 			return customerRepo.findAll();
+		}
+
+		@Override
+		public Customer getCustomerById(long id) {
+			return customerRepo.findById(id).get();
 		}
 }
