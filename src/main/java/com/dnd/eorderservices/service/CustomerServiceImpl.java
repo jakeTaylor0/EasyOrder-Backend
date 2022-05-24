@@ -19,12 +19,21 @@ public class CustomerServiceImpl implements CustomerService{
 	private CustomerRepo customerRepo;
 	
 	@Override
-	public void addCustomer(Customer customer) {
-		customerDAO.saveCustomer(customer);
+	public Customer addCustomer(Customer customer){
+		
+		if(customer.getName().length() > 0 || customer.getPhone().length() > 0)
+			return customerDAO.saveCustomer(customer);
+		else
+			return null;
 	}
 	
 	@Override
 	public List<Customer> findAllCustomers(){
 		return customerDAO.findAllCustomers();
+	}
+	
+	@Override
+	public Customer getCustomerById(long id) {
+		return customerDAO.getCustomerById(id);
 	}
 }
