@@ -6,9 +6,9 @@ import com.dnd.eorderservices.model.Customer;
 
 public interface CustomerDAO {
 	
-	public Customer saveCustomer(Customer customer);
+	Customer saveCustomer(Customer customer);
 	
-	public List<Customer> findAllCustomers();
+	List<Customer> findAllCustomers();
 	
-	public Customer getCustomerById(long id);
+	Customer getCustomerById(long id);
 }

@@ -10,16 +10,16 @@ import javax.persistence.Table;
 @Entity(name = "Customer")
 @Table(name = "eo_customer")
 public class Customer {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "firstName")
+	private String fistName;
 	
-	@Column(name = "email")
-	private String email;
+	@Column(name = "lastName")
+	private String lastName;
 	
 	@Column(name = "phone")
 	private String phone;
@@ -28,10 +28,10 @@ public class Customer {
 		super();
 	}
 	
-	public Customer(String name, String email, String phone) {
+	public Customer(String fistName, String lastName, String phone) {
 		super();
-		this.name = name;
-		this.email = email;
+		this.fistName = fistName;
+		this.lastName = lastName;
 		this.phone = phone;
 	}
 
@@ -39,20 +39,20 @@ public class Customer {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFistName() {
+		return fistName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFistName(String fistName) {
+		this.fistName = fistName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPhone() {
@@ -65,9 +65,6 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", phone="
-				+ phone + "]";
+		return "Customer [id=" + id + ", fistName=" + fistName + ", lastName=" + lastName + ", phone=" + phone + "]";
 	}
-	
-	
 }

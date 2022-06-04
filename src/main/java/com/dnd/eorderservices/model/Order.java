@@ -24,21 +24,24 @@ public class Order {
 	private String orderDetails;
 	
 	@Column(name = "dueDate")
-	private Date dueDate;
+	private String dueDate;
 	
 	@Column(name = "orderTakenBy")
 	private String orderTakenBy;
 	
 	@Column(name = "assignedTo")
-	private Employee assignedTo;
+	private String assignedTo;
 	
 	@Column(name = "status")
 	private String status;
 
-	public Order(long id, int customerId, String orderDetails, Date dueDate, String orderTakenBy, Employee assignedTo,
+	public Order() {
+		super();
+	}
+
+	public Order(int customerId, String orderDetails, String dueDate, String orderTakenBy, String assignedTo,
 			String status) {
 		super();
-		this.id = id;
 		this.customerId = customerId;
 		this.orderDetails = orderDetails;
 		this.dueDate = dueDate;
@@ -47,22 +50,8 @@ public class Order {
 		this.status = status;
 	}
 
-	public Order(long id, int customerId, String orderDetails, Date dueDate, String orderTakenBy, String status) {
-		super();
-		this.id = id;
-		this.customerId = customerId;
-		this.orderDetails = orderDetails;
-		this.dueDate = dueDate;
-		this.orderTakenBy = orderTakenBy;
-		this.status = status;
-	}
-
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public int getCustomerId() {
@@ -81,11 +70,11 @@ public class Order {
 		this.orderDetails = orderDetails;
 	}
 
-	public Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -97,11 +86,11 @@ public class Order {
 		this.orderTakenBy = orderTakenBy;
 	}
 
-	public Employee getAssignedTo() {
+	public String getAssignedTo() {
 		return assignedTo;
 	}
 
-	public void setAssignedTo(Employee assignedTo) {
+	public void setAssignedTo(String assignedTo) {
 		this.assignedTo = assignedTo;
 	}
 
@@ -119,5 +108,4 @@ public class Order {
 				+ dueDate + ", orderTakenBy=" + orderTakenBy + ", assignedTo=" + assignedTo + ", status=" + status
 				+ "]";
 	}
-	
 }

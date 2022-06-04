@@ -6,9 +6,9 @@ import com.dnd.eorderservices.model.Customer;
 
 public interface CustomerService {
 	
-	public Customer addCustomer(Customer customer);
+	Customer addCustomer(Customer customer);
 	
-	public List<Customer> findAllCustomers();
+	List<Customer> findAllCustomers();
 
-	public Customer getCustomerById(long id);
+	Customer getCustomerById(long id);
 }
