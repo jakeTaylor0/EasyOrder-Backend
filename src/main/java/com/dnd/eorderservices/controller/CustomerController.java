@@ -14,16 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dnd.eorderservices.model.Customer;
-import com.dnd.eorderservices.repository.CustomerRepo;
 import com.dnd.eorderservices.service.CustomerService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/customer-services")
 public class CustomerController {
-	
-	@Autowired
-	private CustomerRepo customerRepo;
 	
 	@Autowired
 	private CustomerService customerService;

@@ -15,16 +15,9 @@ public class CustomerServiceImpl implements CustomerService{
 	@Autowired
 	private CustomerDAO customerDAO;
 	
-	@Autowired
-	private CustomerRepo customerRepo;
-	
 	@Override
 	public Customer addCustomer(Customer customer){
-		
-		if(customer.getName().length() > 0 || customer.getPhone().length() > 0)
-			return customerDAO.saveCustomer(customer);
-		else
-			return null;
+		return customerDAO.saveCustomer(customer);
 	}
 	
 	@Override
