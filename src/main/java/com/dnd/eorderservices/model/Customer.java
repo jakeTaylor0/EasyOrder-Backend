@@ -25,8 +25,10 @@ public class Customer {
 		super();
 	}
 
-	public Customer(String name, String phone) {
+
+	public Customer(long customerId, String name, String phone) {
 		super();
+		this.customerId = customerId;
 		this.name = name;
 		this.phone = phone;
 	}
@@ -50,4 +52,10 @@ public class Customer {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", name=" + name + ", phone=" + phone + "]";
+	}	
 }

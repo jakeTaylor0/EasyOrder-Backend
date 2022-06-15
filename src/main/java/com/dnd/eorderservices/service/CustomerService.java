@@ -8,13 +8,13 @@ import com.dnd.eorderservices.model.Customer;
 
 public interface CustomerService {
 	
-	Customer addCustomer(Customer customer);
+Customer addCustomer(Customer customer);
 	
-	List<Customer> findAllCustomers();
+List<Customer> findAllCustomers();
 
-	Customer getCustomerById(long customerId);
+Customer getCustomerById(long id);
 
-	Customer getCustomerByPhone(String phone);
+void updateCustomer(Customer customer);
 
-	void updateCustomer(Customer customer);
+Customer getCustomerByPhone(String phone);
 }

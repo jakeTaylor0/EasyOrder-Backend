@@ -14,7 +14,7 @@ import com.dnd.eorderservices.model.Customer;
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
 	Customer findByPhone(String phone);
-	
+
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("update Customer c set c.name =:name where c.customerId =:customerId")
