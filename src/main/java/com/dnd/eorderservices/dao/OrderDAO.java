@@ -12,4 +12,6 @@ public interface OrderDAO {
 	
 	Order getOrderById(long id);
 
+	List<Order> orderHistory(long customerId);
+
 }

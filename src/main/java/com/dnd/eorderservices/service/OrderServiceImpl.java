@@ -16,6 +16,7 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Override
 	public Order addOrder(Order order){
+		
 		return orderDAO.addOrder(order);
 	}
 
@@ -29,5 +30,10 @@ public class OrderServiceImpl implements OrderService{
 	public Order getOrderById(long id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Order> orderHistory(long customerId) {
+		return orderDAO.orderHistory(customerId);
 	}
 }

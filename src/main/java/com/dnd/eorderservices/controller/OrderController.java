@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dnd.eorderservices.model.Customer;
@@ -31,12 +33,12 @@ public class OrderController {
 	
 	@PostMapping("/saveOrder")
 	public ResponseEntity<Object> saveOrder(@RequestBody Order order){
+		Order o = orderService.addOrder(order);
 		return new ResponseEntity<Object>(orderService.addOrder(order), HttpStatus.OK);
 	}
 	
-	@PostMapping("/updateOrder")
-	public ResponseEntity<Object> editOrder(@RequestBody Order order){
-		
-		return null;
+	@GetMapping("/orderHistory")
+	public ResponseEntity<Object> orderHistory(@RequestParam(name = "customerId") long customerId){
+		return new ResponseEntity<Object>(orderService.orderHistory(customerId), HttpStatus.OK);
 	}
 }

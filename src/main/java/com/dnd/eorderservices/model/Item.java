@@ -1,5 +1,8 @@
 package com.dnd.eorderservices.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
 
 	private String item;
