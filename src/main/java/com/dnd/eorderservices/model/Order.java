@@ -1,12 +1,14 @@
 package com.dnd.eorderservices.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "Order")
@@ -18,7 +20,7 @@ public class Order {
 	private long orderId;
 	
 	@Column(name = "customerId")
-	private int customerId;
+	private long customerId;
 	
 	@Column(name = "orderDetails")
 	private String orderDetails;
@@ -53,12 +55,12 @@ public class Order {
 	public long getOrderId() {
 		return orderId;
 	}
-
-	public int getCustomerId() {
+	
+	public long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
 	}
 

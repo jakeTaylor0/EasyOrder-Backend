@@ -10,6 +10,8 @@ public interface OrderService {
 	
 	List<Order> findAllOrders();
 	
-	Order getOrderById(long id);
+	Order getOrderById(long orderId);
+	
+	List<Order> orderHistory(long customerId);
 
 }

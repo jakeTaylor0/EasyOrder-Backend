@@ -32,4 +32,9 @@ public class OrderDAOImpl implements OrderDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Order> orderHistory(long customerId) {
+		return orderRepo.orderHistory(customerId);
+	}
 }

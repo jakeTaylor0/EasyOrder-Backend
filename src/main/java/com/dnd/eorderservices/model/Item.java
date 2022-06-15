@@ -1,10 +1,13 @@
 package com.dnd.eorderservices.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
 
 	private String item;
 	
-	private String quanity;
+	private String quantity;
 	
 	private String note;
 
@@ -12,10 +15,10 @@ public class Item {
 		super();
 	}
 
-	public Item(String item, String quanity, String note) {
+	public Item(String item, String quantity, String note) {
 		super();
 		this.item = item;
-		this.quanity = quanity;
+		this.quantity = quantity;
 		this.note = note;
 	}
 
@@ -27,12 +30,12 @@ public class Item {
 		this.item = item;
 	}
 
-	public String getQuanity() {
-		return quanity;
+	public String getQuantity() {
+		return quantity;
 	}
 
-	public void setQuanity(String quanity) {
-		this.quanity = quanity;
+	public void setQuanity(String quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getNote() {
@@ -45,6 +48,6 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [item=" + item + ", quanity=" + quanity + ", note=" + note + "]";
+		return "Item [item=" + item + ", quantity=" + quantity + ", note=" + note + "]";
 	}
 }

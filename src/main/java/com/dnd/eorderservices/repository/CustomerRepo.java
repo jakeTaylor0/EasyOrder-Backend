@@ -1,5 +1,6 @@
 package com.dnd.eorderservices.repository;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,9 +12,9 @@ import com.dnd.eorderservices.model.Customer;
 
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
-	
+
 	Customer findByPhone(String phone);
-	
+
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("update Customer c set c.name =:name where c.customerId =:customerId")
