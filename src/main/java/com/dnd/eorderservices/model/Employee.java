@@ -13,7 +13,7 @@ public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long employeeId;
 	
 	@Column(name = "name")
 	private String name;
@@ -21,21 +21,29 @@ public class Employee {
 	@Column(name = "userName")
 	private String userName;
 	
+	@Column(name = "email")
+	private String email;
+	
 	@Column(name = "password")
 	private String password;
 
-	public Employee(long id, String name, String userName, String password) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.userName = userName;
-		this.password = password;
-	}
-	
 	public Employee() {
 		super();
 	}
+	
+	public Employee(long employeeId, String name, String userName, String email, String password) {
+		super();
+		this.employeeId = employeeId;
+		this.name = name;
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+	}
 
+	public long getEmployeeId() {
+		return employeeId;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -52,6 +60,14 @@ public class Employee {
 		this.userName = userName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -62,8 +78,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", userName=" + userName + "]";
+		return "Employee [employeeId=" + employeeId + ", name=" + name + ", userName=" + userName + ", email=" + email
+				+ ", password=" + password + "]";
 	}
-	
-	
 }

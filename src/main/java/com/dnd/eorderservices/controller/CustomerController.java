@@ -53,4 +53,21 @@ public class CustomerController {
 			return new ResponseEntity<Object>("Failed to process request", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping("/getCustomerByPhone")
+	public ResponseEntity<Object> getCustomerByPhone(@RequestParam(name="phone") String phone){
+		Customer c = customerService.getCustomerByPhone(phone);
+		if(c != null)
+			return new ResponseEntity<Object>(c, HttpStatus.OK);
+		else
+			return new ResponseEntity<Object>("No data found.", HttpStatus.OK);
+	}
+
+	@PostMapping("/updateCustomer")
+	public ResponseEntity<Object> updateCustomerNameByPhone(@RequestBody Customer customer) {
+		//update customer name based on phone
+		//phone will be unique for each customer
+		customerService.updateCustomer(customer);
+		return new ResponseEntity<Object>(customerService.getCustomerById(customer.getCustomerId()), HttpStatus.OK);
+	}
 }

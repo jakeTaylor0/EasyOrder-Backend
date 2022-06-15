@@ -11,4 +11,8 @@ public interface CustomerService {
 	List<Customer> findAllCustomers();
 
 	Customer getCustomerById(long id);
+
+	void updateCustomer(Customer customer);
+
+	Customer getCustomerByPhone(String phone);
 }

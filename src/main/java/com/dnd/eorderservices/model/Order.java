@@ -15,7 +15,7 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long orderId;
 	
 	@Column(name = "customerId")
 	private int customerId;
@@ -50,8 +50,8 @@ public class Order {
 		this.status = status;
 	}
 
-	public long getId() {
-		return id;
+	public long getOrderId() {
+		return orderId;
 	}
 
 	public int getCustomerId() {
@@ -104,7 +104,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", customerId=" + customerId + ", orderDetails=" + orderDetails + ", dueDate="
+		return "Order [orderId=" + orderId + ", customerId=" + customerId + ", orderDetails=" + orderDetails + ", dueDate="
 				+ dueDate + ", orderTakenBy=" + orderTakenBy + ", assignedTo=" + assignedTo + ", status=" + status
 				+ "]";
 	}

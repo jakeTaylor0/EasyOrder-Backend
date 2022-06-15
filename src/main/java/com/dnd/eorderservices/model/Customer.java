@@ -13,13 +13,10 @@ public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long customerId;
 	
-	@Column(name = "firstName")
-	private String fistName;
-	
-	@Column(name = "lastName")
-	private String lastName;
+	@Column(name = "name")
+	private String name;
 	
 	@Column(name = "phone")
 	private String phone;
@@ -27,32 +24,24 @@ public class Customer {
 	public Customer() {
 		super();
 	}
-	
-	public Customer(String fistName, String lastName, String phone) {
+
+	public Customer(long customerId, String name, String phone) {
 		super();
-		this.fistName = fistName;
-		this.lastName = lastName;
+		this.customerId = customerId;
+		this.name = name;
 		this.phone = phone;
 	}
 
-	public long getId() {
-		return id;
+	public long getCustomerId() {
+		return customerId;
 	}
 
-	public String getFistName() {
-		return fistName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFistName(String fistName) {
-		this.fistName = fistName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPhone() {
@@ -65,6 +54,6 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", fistName=" + fistName + ", lastName=" + lastName + ", phone=" + phone + "]";
-	}
+		return "Customer [customerId=" + customerId + ", name=" + name + ", phone=" + phone + "]";
+	}	
 }

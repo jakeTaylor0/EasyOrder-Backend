@@ -29,4 +29,15 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer getCustomerById(long id) {
 		return customerDAO.getCustomerById(id);
 	}
+
+	@Override
+	public void updateCustomer(Customer customer) {
+		customerDAO.updateCustomer(customer);
+	}
+
+	@Override
+	public Customer getCustomerByPhone(String phone) {
+		return customerDAO.getCustomerByPhone(phone);
+		
+	}
 }
