@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 	
 	@Override
-	public Customer getCustomerById(String customerId) {
+	public Customer getCustomerById(long customerId) {
 		return customerDAO.getCustomerById(customerId);
 	}
 

@@ -37,47 +37,72 @@ public class CustomerController {
 		return new ResponseEntity<Response>(new Response("200", "All customers within our db", customerList), HttpStatus.OK);
 	}
 	
-	@PostMapping("/getCustomerById")
-	public ResponseEntity<Response> getCustomerById(@PathVariable("id") String id) {
-		LOGGER.info("Controller getting all customer details with id: {}", id);
-		Customer customer = customerService.getCustomerById(id);
+	/*
+	@GetMapping("/getCustomerById/{customerId}")
+	public ResponseEntity<Response> getCustomerById(@PathVariable String customerId) {
+		LOGGER.info("Controller getting all customer details with id: {}", customerId);
+		
+		
 		try {
-			return new ResponseEntity<Response>(new Response("200", "Customer was retrieved successfully with id:" + id, customer), HttpStatus.OK);
+			Customer customer = customerService.getCustomerById(customerId);
+			if(customer != null)
+				return new ResponseEntity<Response>(new Response("200", "Customer was retrieved successfully with id:" + customerId, customer), HttpStatus.OK);
+			else
+				return new ResponseEntity<Response>(new Response("404", "No customer data found with id: " + customerId, customer), HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("404", "No customer data found with id: " + id, customer), HttpStatus.OK);
+			return new ResponseEntity<Response>(new Response("-1", "Error processing request", null), HttpStatus.OK);
 		}
 	}
+	*/
 	
 	@PostMapping("/saveCustomer")
 	public ResponseEntity<Response> saveCustomer(@RequestBody Customer customer) {
 		try {
 			LOGGER.info("Controller saving customer info: {}", customer);
-			Customer c = customerService.addCustomer(customer);
-			if(!c.getName().equals("") || !c.getPhone().equals("")
-			 || c.getName() != null || c.getPhone() != null)
-				return new ResponseEntity<Response>(new Response("200", "Customer info was saved successfully", c), HttpStatus.OK);
 			
-			else
-				return new ResponseEntity<Response>(new Response("400", "Bad Request", customer), HttpStatus.OK);
+			Customer a = customerService.getCustomerByPhone(customer.getPhone());
+			if(a != null) {
+				if(a.getName().equals(customer.getName()) && a.getPhone().equals(customer.getPhone()))
+					return new ResponseEntity<Response>(new Response("200","Duplicate Entry Found", null), HttpStatus.OK);
+				else {
+					customerService.updateCustomer(customer);
+					Customer b = customerService.getCustomerByPhone(a.getPhone());
+					return new ResponseEntity<Response>(new Response("200", "Updated Customer Name", b), HttpStatus.OK);
+				}
+			}
+			else {
+				if(!customer.getName().equals("") && !customer.getPhone().equals("") && customer.getName() != null && customer.getPhone() != null) {
+					Customer c = customerService.addCustomer(customer);
+					return new ResponseEntity<Response>(new Response("200", "Customer info was saved successfully", c), HttpStatus.OK);
+				}
+				else
+					return new ResponseEntity<Response>(new Response("200", "Please provide mandatory fields: [NAME, PHONE]", null), HttpStatus.OK);
+			}
+			
 		}catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("200", "", customerService.addCustomer(customer)), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Response>(new Response("-1", "Error processing request", null), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@GetMapping("/getCustomerByPhone")
 	public ResponseEntity<Response> getCustomerByPhone(@RequestParam(name="phone") String phone){
 		LOGGER.info("Controller geting customer details with phone: {}", phone);
-		Customer c = customerService.getCustomerByPhone(phone);
-		if(c != null)
-			return new ResponseEntity<Response>(new Response("200", "Customer data found with phone: " + phone, c), HttpStatus.OK);
-		else
-			return new ResponseEntity<Response>(new Response("404", "Customer data not found with phone: " + phone, c), HttpStatus.OK);
+		
+		try {
+			Customer c = customerService.getCustomerByPhone(phone);
+			if(c != null)
+				return new ResponseEntity<Response>(new Response("200", "Customer data found with phone: " + phone, c), HttpStatus.OK);
+			else
+				return new ResponseEntity<Response>(new Response("404", "No customer data was found", c), HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<Response>(new Response("-1", "Error processing requet", null), HttpStatus.OK);
+		}
 	}
-	/*
+	
 	@PostMapping("/updateCustomer")
 	public ResponseEntity<Response> updateCustomerNameByPhone(@RequestBody Customer customer) {
 		LOGGER.info("Controller updating customer details: {}", customer);
 		customerService.updateCustomer(customer);
 		return new ResponseEntity<Response>(new Response("200", "Customer information was udpated successfully", customerService.getCustomerById(customer.getCustomerId())), HttpStatus.OK);
-	}*/
+	}
 }

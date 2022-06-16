@@ -12,7 +12,7 @@ Customer addCustomer(Customer customer);
 	
 List<Customer> findAllCustomers();
 
-Customer getCustomerById(String id);
+Customer getCustomerById(long id);
 
 void updateCustomer(Customer customer);
 

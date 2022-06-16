@@ -28,15 +28,14 @@ public class CustomerDAOImpl implements CustomerDAO {
 		}
 
 		@Override
-		public Customer getCustomerById(String customerId) {
-			long id = Long.parseLong(customerId);
-			return customerRepo.findById(id).get();
+		public Customer getCustomerById(long customerId) {
+			return customerRepo.findById(customerId).get();
 		}
 
 
 		@Override
 		public void updateCustomer(Customer customer) {
-			customerRepo.updateCustomer(customer.getName(), customer.getCustomerId());
+			customerRepo.updateCustomer(customer.getName(), customer.getPhone());
 		}
 
 		@Override

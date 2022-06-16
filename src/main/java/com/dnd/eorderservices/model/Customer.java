@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "Customer")
 @Table(name = "eo_customer")
@@ -13,18 +16,18 @@ public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "customerId", unique = true)
 	private long customerId;
 	
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@Column(name = "phone")
+	@Column(name = "phone", updatable = false, nullable = false)
 	private String phone;
 
 	public Customer() {
 		super();
 	}
-
 
 	public Customer(long customerId, String name, String phone) {
 		super();
@@ -48,14 +51,4 @@ public class Customer {
 	public String getPhone() {
 		return phone;
 	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Customer [name=" + name + ", phone=" + phone + "]";
-	}	
 }

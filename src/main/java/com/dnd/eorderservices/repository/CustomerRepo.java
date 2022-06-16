@@ -17,6 +17,6 @@ public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("update Customer c set c.name =:name where c.customerId =:customerId")
-	void updateCustomer(@Param("name") String name, @Param("customerId") Long customerId);
+	@Query("update Customer c set c.name =:name where c.phone =:phone")
+	void updateCustomer(@Param("name") String name, @Param("phone") String phone);
 }
