@@ -2,6 +2,8 @@ package com.dnd.eorderservices.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dnd.eorderservices.model.Customer;
+import com.dnd.eorderservices.model.Response;
 import com.dnd.eorderservices.service.CustomerService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -22,71 +25,59 @@ import com.dnd.eorderservices.service.CustomerService;
 @RequestMapping("/customer-services")
 public class CustomerController {
 	
+	private final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
+	
 	@Autowired
 	private CustomerService customerService;
 	
 	@GetMapping("/allCustomers")
-	public List<Customer> getAllCustomers(){
-		return this.customerService.findAllCustomers();
+	public ResponseEntity<Response> getAllCustomers(){
+		LOGGER.info("Controller getting all customer details");
+		List<Customer> customerList = customerService.findAllCustomers();
+		return new ResponseEntity<Response>(new Response("200", "All customers within our db", customerList), HttpStatus.OK);
 	}
 	
-	@GetMapping("/getCustomerById")
-	public ResponseEntity<Object> getCustomerById(@RequestParam(name="customerId") long id) {
+	@PostMapping("/getCustomerById")
+	public ResponseEntity<Response> getCustomerById(@PathVariable("id") String id) {
+		LOGGER.info("Controller getting all customer details with id: {}", id);
+		Customer customer = customerService.getCustomerById(id);
 		try {
-			Customer customer = customerService.getCustomerById(id);
-			return new ResponseEntity<Object>(customer, HttpStatus.OK);
+			return new ResponseEntity<Response>(new Response("200", "Customer was retrieved successfully with id:" + id, customer), HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<Object>("ID NOT FOUND", HttpStatus.OK);
+			return new ResponseEntity<Response>(new Response("404", "No customer data found with id: " + id, customer), HttpStatus.OK);
 		}
-		
 	}
-	
-	@GetMapping("/getCustomerByPhone")
-	public ResponseEntity<Object> getCustomerByPhone(@RequestParam(name="phone") String phone){
-		Customer c = customerService.getCustomerByPhone(phone);
-		if(c != null)
-			return new ResponseEntity<Object>(c, HttpStatus.OK);
-		else
-			return new ResponseEntity<Object>("No data found.", HttpStatus.OK);
-	}
-	
-	@PostMapping("/updateCustomer")
-	public ResponseEntity<Object> updateCustomerNameByPhone(@RequestBody Customer customer) {
-		//update customer name based on phone
-		//phone will be unique for each customer
-		customerService.updateCustomer(customer);
-		return new ResponseEntity<Object>(customerService.getCustomerById(customer.getCustomerId()), HttpStatus.OK);
-	}
-	
 	
 	@PostMapping("/saveCustomer")
-	public ResponseEntity<Object> saveCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Response> saveCustomer(@RequestBody Customer customer) {
 		try {
+			LOGGER.info("Controller saving customer info: {}", customer);
 			Customer c = customerService.addCustomer(customer);
+			if(!c.getName().equals("") || !c.getPhone().equals("")
+			 || c.getName() != null || c.getPhone() != null)
+				return new ResponseEntity<Response>(new Response("200", "Customer info was saved successfully", c), HttpStatus.OK);
 			
-			if(c != null)
-				return new ResponseEntity<Object>(c, HttpStatus.OK);
 			else
-				return new ResponseEntity<Object>("Missing name/phone", HttpStatus.OK);
+				return new ResponseEntity<Response>(new Response("400", "Bad Request", customer), HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<Object>("Failed to process request", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Response>(new Response("200", "", customerService.addCustomer(customer)), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@GetMapping("/getCustomerByPhone")
-	public ResponseEntity<Object> getCustomerByPhone(@RequestParam(name="phone") String phone){
+	public ResponseEntity<Response> getCustomerByPhone(@RequestParam(name="phone") String phone){
+		LOGGER.info("Controller geting customer details with phone: {}", phone);
 		Customer c = customerService.getCustomerByPhone(phone);
 		if(c != null)
-			return new ResponseEntity<Object>(c, HttpStatus.OK);
+			return new ResponseEntity<Response>(new Response("200", "Customer data found with phone: " + phone, c), HttpStatus.OK);
 		else
-			return new ResponseEntity<Object>("No data found.", HttpStatus.OK);
+			return new ResponseEntity<Response>(new Response("404", "Customer data not found with phone: " + phone, c), HttpStatus.OK);
 	}
-
+	/*
 	@PostMapping("/updateCustomer")
-	public ResponseEntity<Object> updateCustomerNameByPhone(@RequestBody Customer customer) {
-		//update customer name based on phone
-		//phone will be unique for each customer
+	public ResponseEntity<Response> updateCustomerNameByPhone(@RequestBody Customer customer) {
+		LOGGER.info("Controller updating customer details: {}", customer);
 		customerService.updateCustomer(customer);
-		return new ResponseEntity<Object>(customerService.getCustomerById(customer.getCustomerId()), HttpStatus.OK);
-	}
+		return new ResponseEntity<Response>(new Response("200", "Customer information was udpated successfully", customerService.getCustomerById(customer.getCustomerId())), HttpStatus.OK);
+	}*/
 }

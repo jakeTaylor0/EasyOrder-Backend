@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-//import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestTemplate;
 
 @EnableAutoConfiguration
 @SpringBootApplication
@@ -16,10 +16,10 @@ public class EasyOrderBackendApplication extends SpringBootServletInitializer{
 		SpringApplication.run(EasyOrderBackendApplication.class, args);
 	}
 	
-	/*
+	
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
-	}*/
+	}
 
 }

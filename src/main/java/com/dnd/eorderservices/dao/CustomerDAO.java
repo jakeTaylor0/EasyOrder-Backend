@@ -10,7 +10,7 @@ public interface CustomerDAO {
 	
 	List<Customer> findAllCustomers();
 
-	Customer getCustomerById(long id);
+	Customer getCustomerById(String id);
 
 	void updateCustomer(Customer customer);
 
