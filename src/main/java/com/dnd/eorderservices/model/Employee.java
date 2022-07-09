@@ -15,6 +15,9 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long employeeId;
 	
+	@Column
+	private String workGroup;
+	
 	@Column(name = "name")
 	private String name;
 	

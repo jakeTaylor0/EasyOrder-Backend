@@ -34,10 +34,9 @@ public class CustomerController {
 	public ResponseEntity<Response> getAllCustomers(){
 		LOGGER.info("Controller getting all customer details");
 		List<Customer> customerList = customerService.findAllCustomers();
-		return new ResponseEntity<Response>(new Response("200", "All customers within our db", customerList), HttpStatus.OK);
+		return new ResponseEntity<Response>(new Response("200", "OK ", customerList), HttpStatus.OK);
 	}
-	
-	/*
+
 	@GetMapping("/getCustomerById/{customerId}")
 	public ResponseEntity<Response> getCustomerById(@PathVariable String customerId) {
 		LOGGER.info("Controller getting all customer details with id: {}", customerId);
@@ -53,7 +52,6 @@ public class CustomerController {
 			return new ResponseEntity<Response>(new Response("-1", "Error processing request", null), HttpStatus.OK);
 		}
 	}
-	*/
 	
 	@PostMapping("/saveCustomer")
 	public ResponseEntity<Response> saveCustomer(@RequestBody Customer customer) {
@@ -63,7 +61,7 @@ public class CustomerController {
 			Customer a = customerService.getCustomerByPhone(customer.getPhone());
 			if(a != null) {
 				if(a.getName().equals(customer.getName()) && a.getPhone().equals(customer.getPhone()))
-					return new ResponseEntity<Response>(new Response("200","Duplicate Entry Found", null), HttpStatus.OK);
+					return new ResponseEntity<Response>(new Response("200","Duplicate Entry Found", a), HttpStatus.OK);
 				else {
 					customerService.updateCustomer(customer);
 					Customer b = customerService.getCustomerByPhone(a.getPhone());
@@ -103,6 +101,7 @@ public class CustomerController {
 	public ResponseEntity<Response> updateCustomerNameByPhone(@RequestBody Customer customer) {
 		LOGGER.info("Controller updating customer details: {}", customer);
 		customerService.updateCustomer(customer);
-		return new ResponseEntity<Response>(new Response("200", "Customer information was udpated successfully", customerService.getCustomerById(customer.getCustomerId())), HttpStatus.OK);
+		String id = customer.getCustomerId() + "";
+		return new ResponseEntity<Response>(new Response("200", "Customer information was udpated successfully", customerService.getCustomerById(id)), HttpStatus.OK);
 	}
 }

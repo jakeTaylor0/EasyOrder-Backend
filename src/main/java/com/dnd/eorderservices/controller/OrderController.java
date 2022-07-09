@@ -2,6 +2,8 @@ package com.dnd.eorderservices.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dnd.eorderservices.model.Customer;
 import com.dnd.eorderservices.model.Order;
+import com.dnd.eorderservices.model.Response;
 import com.dnd.eorderservices.service.OrderService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -23,6 +26,8 @@ import com.dnd.eorderservices.service.OrderService;
 @RequestMapping("/order-services")
 public class OrderController {
 	
+	private final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
+
 	@Autowired
 	private OrderService orderService;
 	
@@ -32,13 +37,23 @@ public class OrderController {
 	}
 	
 	@PostMapping("/saveOrder")
-	public ResponseEntity<Object> saveOrder(@RequestBody Order order){
+	public ResponseEntity<Response> saveOrder(@RequestBody Order order){
 		Order o = orderService.addOrder(order);
-		return new ResponseEntity<Object>(orderService.addOrder(order), HttpStatus.OK);
+		try {
+			return new ResponseEntity<Response>(new Response("200", "Order Saved Successfully", o), HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<Response>(new Response("500", "Something went wrong", null), HttpStatus.OK);
+		}
+		
+		
 	}
 	
 	@GetMapping("/orderHistory")
-	public ResponseEntity<Object> orderHistory(@RequestParam(name = "customerId") long customerId){
-		return new ResponseEntity<Object>(orderService.orderHistory(customerId), HttpStatus.OK);
+	public ResponseEntity<Response> orderHistory(@RequestParam(name = "customerId") long customerId){
+		List<Order> customerOrderHistory = orderService.orderHistory(customerId);
+		if(!customerOrderHistory.isEmpty())
+			return new ResponseEntity<Response>(new Response("200", "Order history retrieved for customer", customerOrderHistory), HttpStatus.OK);
+		else
+			return new ResponseEntity<Response>(new Response("404", "No Orders found", customerOrderHistory), HttpStatus.OK);
 	}
 }
