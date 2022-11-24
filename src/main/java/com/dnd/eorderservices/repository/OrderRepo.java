@@ -14,7 +14,7 @@ import com.dnd.eorderservices.model.Order;
 @Repository
 public interface OrderRepo extends JpaRepository<Order, Long> {
 
-	@Query("select o from Order o where o.customerId =:customerId")
+	@Query("select o from Order o where o.customerId =:customerId order by orderId desc")
 	List<Order> orderHistory(@Param("customerId") Long customerId);
 
 }
