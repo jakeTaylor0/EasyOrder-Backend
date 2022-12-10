@@ -64,6 +64,10 @@ public class Order {
 		return orderId;
 	}
 
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+
 	public long getCustomerId() {
 		return customerId;
 	}
@@ -126,5 +130,4 @@ public class Order {
 				+ ", dueDate=" + dueDate + ", orderTakenBy=" + orderTakenBy + ", orderTakenTime=" + orderTakenTime
 				+ ", assignedTo=" + assignedTo + ", status=" + status + "]";
 	}
-
 }

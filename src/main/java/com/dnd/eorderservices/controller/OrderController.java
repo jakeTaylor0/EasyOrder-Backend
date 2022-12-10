@@ -26,7 +26,7 @@ import com.dnd.eorderservices.service.OrderService;
 @RequestMapping("/order-services")
 public class OrderController {
 	
-	private final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
 	@Autowired
 	private OrderService orderService;
