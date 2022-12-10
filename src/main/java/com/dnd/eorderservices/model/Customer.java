@@ -40,6 +40,10 @@ public class Customer {
 		return customerId;
 	}
 
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -51,4 +55,10 @@ public class Customer {
 	public String getPhone() {
 		return phone;
 	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
 }
