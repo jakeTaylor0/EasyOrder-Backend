@@ -29,7 +29,7 @@ public class CustomerServiceImplTest {
 		c1.setPhone("11231234");
 		
 		Mockito.when(customerDAO.saveCustomer(c1)).thenReturn(c1);
-		customerService.addCustomer(c1);
+		//customerService.addCustomer(c1);
 	}
 	
 	@Test

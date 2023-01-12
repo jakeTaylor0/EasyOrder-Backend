@@ -23,14 +23,12 @@ public class OrderDAOImpl implements OrderDAO{
 
 	@Override
 	public List<Order> findAllOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		return orderRepo.findAll();
 	}
 
 	@Override
 	public Order getOrderById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return orderRepo.findById(id);
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Order getOrderById(long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return orderDAO.getOrderById(id);
 	}
 
 	@Override
