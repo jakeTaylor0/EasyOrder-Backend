@@ -56,4 +56,10 @@ public class OrderController {
 		else
 			return new ResponseEntity<Response>(new Response("404", "No Orders found", customerOrderHistory), HttpStatus.OK);
 	}
+	
+	@GetMapping("/findOrderById")
+	public ResponseEntity<Response> findOrderById(@RequestParam(name = "orderId") long orderId){
+		Order o = orderService.getOrderById(orderId);
+		return new ResponseEntity<Response>(new Response("200", "Order Id: " + orderId, o), HttpStatus.OK);
+	}
 }
