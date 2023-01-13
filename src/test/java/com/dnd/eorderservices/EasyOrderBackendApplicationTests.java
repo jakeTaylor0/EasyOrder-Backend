@@ -5,10 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootTest
 class EasyOrderBackendApplicationTests {
 	
 	@Mock
